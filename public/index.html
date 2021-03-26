@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Box</title>
+  
+</head>
+<body style="margin-left:15%">
+  <h1>Chat Box</h1>
+
+  <textarea id="chatMsgThread" placeholder="Chat will appear here..." 
+  cols="100" rows="25"></textarea>
+  <br>
+
+  <input type="text" id="nickNameInput" placeholder="Enter Nick Name">
+  <br>
+  <textarea id="chatInput" placeholder="Enter Your Chat Message" 
+  cols="100" rows="5"></textarea>
+  <br>
+  <button type="button" id="sendChatBtn">Send Chat</button>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+
+    sendChatBtn.addEventListener('click', function(e) {
+      console.log('Emitting chat message');
+      // compile the chat message
+      // Emit the event from front end first
+      socket.emit('chat', {
+        nickName: document.getElementById("nickNameInput").value,
+        chatMsg: document.getElementById("chatInput").value
+      });
+    });
+
+    socket.on("newChat", (data)=>{
+      console.log(data);
+
+      var msg = data.nickName + ": " + data.message;
+      // document.getElementById("chatMsgThread").value = 
+      //   document.getElementById("chatMsgThread").value + msg + " \n";
+        // The following will work if you use jquery
+      $("#chatMsgThread").val($("#chatMsgThread").val()+ msg + "\n");
+    });
+
+    $("#chatInput").on("keyup", ()=>{
+      console.log('typing');
+      // emit typing event 
+      // broadcast it on the server side 
+      // have the event listener on the front end side
+    });
+
+  </script>
+
+</body>
+</html>
