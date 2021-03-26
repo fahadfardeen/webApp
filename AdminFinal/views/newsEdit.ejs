@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="/stylesheets/newsEdit.css">
+    <%- include('./header') %>
+    <title>NewsEdit</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <table id="myTable" class="display">
+      <thead>
+          <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Published At</th>
+              <th>Edit/Delete</th>
+          </tr>
+      </thead>
+      <tbody>
+        <% data.forEach(function(news){ %>
+            <tr  id='<%= news._id %>'>
+              <td class="row-data"><%= news.inputTitle %></td>
+              <td class="row-data"><%= news.inputDesc %></td>
+              <td class="row-data"><%= news.inputTime %></td>
+              <td class="row-data"><button class="btn btn-primary">Edit</button><form method="POST" action="http://localhost:3000/delete"><button class="btn btn-danger" onclick="dlt()">Delete</button></form></td>
+            </tr>
+          <% }); %>
+      </tbody>
+  </table>
+  <%- include('./footer') %>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  </body>
+  <script>
+    function dlt(){
+        //var rowId=event.target.parentNode.parentNode.id;
+        delete(event.target.parentNode.parentNode);
+        //var status=data[1].innerHTML;
+        //var email=data[3].innerHTML;
+        //sendEmail(status, email);
+      }
+    $(document).ready( function () {
+      $('#myTable').DataTable();
+    } );
+  </script>
+</html>
