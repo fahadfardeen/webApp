@@ -1,6 +1,8 @@
 var express = require('express');
 const newsModel = require('../models/newsModel');
 var router = express.Router();
+const mongoose = require('../models/mongo');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -21,5 +23,20 @@ router.post('/add', function(req, res, next) {
   });
 
 });
+router.get("/allNews", function(req, res) {
+  const con = mongoose.createConnection('mongodb://localhost/newsdb', {useNewUrlParser: true, useUnifiedTopology: true});
+  con.once('open', function(){
+    con.db.collection("newsmodels", function(err, collection){
+      collection.find({}).toArray(function(err, data){
+          res.json(data);
+      });
+    });
+  });
+});
+router.get('/test', function(req, res, next) {
+  console.log(req.body);
+  res.render("../views/test");
+});
+
 
 module.exports = router;

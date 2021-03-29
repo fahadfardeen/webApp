@@ -14,10 +14,14 @@ function findUsers(res){
       });
     });
 }
+
 router.get('/', function (req, res) {
     findUsers(res);
 });
 router.get('/delete/:id', function(req, res, next) {
+
+//jwt
+
     console.log(req.params.id);
     news.findByIdAndRemove( req.params.id.trim(), (err, status) => {
         if(!err){
@@ -44,5 +48,8 @@ router.get('/delete/:id', function(req, res, next) {
     })
   });
 
-
+  router.get('/test', function(req, res, next) {
+    console.log(req.body);
+    res.render("../views/index");
+  });
 module.exports = router;
