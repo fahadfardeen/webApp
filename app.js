@@ -40,7 +40,7 @@ http.listen(3000, () => {
 
 
 
-
+/*
 //const express = require('express');
 //const app = express();
 const request = require('request');
@@ -92,3 +92,5 @@ app.listen(port, (err) => {
 app.use(express.static(__direname+'/public/weather'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
+
+*/
