@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="/stylesheets/footer.css">
+    <link rel="stylesheet" href="/stylesheets/newsEdit.css">
+    <%- include('./header') %>
+    <title>NewsEdit</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <table id="myTable" class="display">
+      <thead>
+          <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Published At</th>
+              <th>Edit/Delete</th>
+          </tr>
+      </thead>
+      <tbody id="table">
+        <% data.forEach(function(news){ %>
+                <tr  id='<%= news._id %>'>
+                <td id='<%= news.inputTitle %>' class="row-data" contenteditable="false"><%= news.inputTitle %></td>
+                <td id='<%= news.inputDesc %>' class="row-data" contenteditable="false"><%= news.inputDesc %></td>
+                <td id='<%= news.inputTime %>' class="row-data" contenteditable="false"><%= news.inputTime %></td>
+                <td id='<%= news._id %>' class="row-data">
+                  <a hidden id="edit" name="edit"class="btn btn-primary" onclick="let a = '<%= news._id %>';let x = '<%= news.inputTitle %>'; let y = '<%= news.inputDesc %>'; let z = '<%= news.inputTime %>'; dltPost(a,x,y,z);">Finish Edit</a>
+                  <button type="button" id="editStart" class="btn btn-primary" onclick="dlt(null)">Edit</button>
+                  <button type="button" hidden id="editCancel"class="btn btn-danger" onclick="dlt(null)">Cancel</button>
+                  <a id="delete" name="delete"class="btn btn-danger" href="http://localhost:3000/users/delete/<%= news._id %>">Delete</a>
+                </td>
+                </tr>
+          <% }); %>
+      </tbody>
+  </table>
+  <%- include('./footer') %>
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  </body>
+  <script>
+    function dlt(){
+        document.getElementById("edit").toggleAttribute("hidden");
+        document.getElementById("editCancel").toggleAttribute("hidden");
+        document.getElementById("editStart").toggleAttribute("hidden");
+        document.getElementById("delete").toggleAttribute("hidden");
+        var elements = document.getElementById("table").getElementsByTagName("td");
+          for(var i = 0, length = elements.length; i < length; i++) {
+            console.log(elements[i]);
+            if( elements[i].contentEditable == 'false'){
+              elements[i].contentEditable = 'true';
+            } else{
+              elements[i].contentEditable = 'false';
+            }
+          }
+      }
+      function dltPost(id, title, desc, time){
+        console.log(title, desc, time);
+        var inputTitle=document.getElementById(title).innerHTML;
+        var inputDesc=document.getElementById(desc).innerHTML;
+        var inputTime=document.getElementById(time).innerHTML;
+        console.log(inputTitle,inputDesc,inputTime);
+        $.get("http://localhost:3000/users/edit/"+id+"/"+inputDesc+"/"+inputTime+"/"+inputTitle);
+        //event.preventDefault();
+      }
+    $(document).ready( function () {
+      $('#myTable').DataTable();
+    } );
+  </script>
+</html>

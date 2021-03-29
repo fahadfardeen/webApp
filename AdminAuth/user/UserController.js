@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const Mongodb = require('mongodb');
+const newsModel = require('../newsModel');
 const MongoClient = Mongodb.MongoClient;
 
 const LocalStorage = require('node-localstorage').LocalStorage;
@@ -22,7 +23,7 @@ router.get('/', function (req, res) {
     });
 });
 
-// GETS shopping list FROM THE DATABASE
+// GETS  news form
 router.get('/addnews', function (req, res) {
     var token = localStorage.getItem('authtoken')
     console.log("token>>>",token)
@@ -37,32 +38,31 @@ router.get('/addnews', function (req, res) {
         User.findById(decoded.id, { password: 0 }, function (err, user) {
             if (err) {res.redirect('/')}
             if (!user) {res.redirect('/')}
-            console.log('>>>>>><<<<<< up to here')
-
+            
             res.render('addnews.ejs');
-            /*MongoClient.connect('mongodb://127.0.0.1:27017/', {useNewUrlParser:true}, function(err,client) {
-                if(err) throw err;
-                db = client.db('admin');
-                var slist;
-                db.collection('shoppinglist').find().toArray((err,result) => {
-                    if(err) throw err;
-                    console.log(result);
-                    res.render('shoppinglist.ejs',{result})
-                })
-
-               
-            //res.render('shoppinglist.ejs',{slist})
-            })*/
-
-
-            //db = MongoClient.db('admin')
-            //var slist = db.collection('shoppinglist').find().toArray();
-            //console.log(slist);
-            //res.render('shoppinglist.ejs',{slist})
-            //res.render('shoppinglist.ejs',{user})
+            
         });
     });
 });
+
+
+//post news
+router.post('/add', function(req, res, next) {
+    console.log(req.body);
+    const news = new newsModel(req.body);
+    news.save( (err, status) => {   
+      if(!err){
+        console.log('News Post has been Saved!');
+        res.render('addnews');
+      }else{
+        console.log('Error'+err);
+        res.json(err);
+      }
+    });
+  
+});
+
+
 
 // GETS shopping list FROM THE DATABASE
 router.get('/getnews', function (req, res) {
@@ -74,28 +74,34 @@ router.get('/getnews', function (req, res) {
     jwt.verify(token, config.secret, function(err, decoded) {
     if (err) {
         res.redirect('/')
-    };
-        
-     
-        User.findById(decoded.id, { password: 0 }, function (err, user) {
-            if (err) {res.redirect('/')}
-            if (!user) {res.redirect('/')}
-            console.log('>>>>>><<<<<< up to here')
-
-            //fetch news from db, below need to be modified
-            MongoClient.connect('mongodb://127.0.0.1:27017/', {useNewUrlParser:true}, function(err,client) {
-                if(err) throw err;
-                db = client.db('admin');
-                var slist;
-                db.collection('users').find().toArray((err,result) => {
-                    if(err) throw err;
-                    console.log(result);
-                    res.render('userlist.ejs',{result})
-                })
+    };    
+    //fetch news from db, below need to be modified
+    MongoClient.connect('mongodb://127.0.0.1:27017/', {useNewUrlParser:true}, function(err,client) {
+        if(err) throw err;
+        db = client.db('admin');
+        var slist;
+        db.collection('newsmodels').find().toArray((err,data) => {
+            if(err) throw err;
+            console.log(data);
+            res.render('newsEdit.ejs',{data})
             })
-        });
+        })
     });
 });
+
+router.get('/delete/:id', function (req, res) {
+    var token = localStorage.getItem('authtoken')
+    console.log("token>>>",token)
+    if (!token) {
+        res.redirect('/')
+    }
+    jwt.verify(token, config.secret, function(err, decoded) {
+    if (err) {
+        res.redirect('/')
+    };    
+    })
+});
+
 
  router.get('/logout', (req,res) => {
      localStorage.removeItem('authtoken');
