@@ -35,7 +35,9 @@
           <% }); %>
       </tbody>
   </table>
-  <%- include('./footer') %>
+  <iframe src="../test" width="250" height="250" style="text-align:center;" id="iframe">
+  </iframe>
+    <%- include('./footer') %>
   <script
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -72,5 +74,10 @@
     $(document).ready( function () {
       $('#myTable').DataTable();
     } );
+    $("#iframe").ready(function() {
+                var body = $("#iframe").contents().find("body");
+                body.append(
+                  'GEEKSFORGEEKS - A computer science portal for geeks.');
+            });
   </script>
 </html>
