@@ -26,16 +26,16 @@
                 <td id='<%= news.inputDesc %>' class="row-data" contenteditable="false"><%= news.inputDesc %></td>
                 <td id='<%= news.inputTime %>' class="row-data" contenteditable="false"><%= news.inputTime %></td>
                 <td id='<%= news._id %>' class="row-data">
-                  <a hidden id="edit" name="edit"class="btn btn-primary" onclick="let a = '<%= news._id %>';let x = '<%= news.inputTitle %>'; let y = '<%= news.inputDesc %>'; let z = '<%= news.inputTime %>'; dltPost(a,x,y,z);">Finish Edit</a>
-                  <button type="button" id="editStart" class="btn btn-primary" onclick="dlt(null)">Edit</button>
-                  <button type="button" hidden id="editCancel"class="btn btn-danger" onclick="dlt(null)">Cancel</button>
-                  <a id="delete" name="delete"class="btn btn-danger" href="http://localhost:3000/newsEdit/delete/<%= news._id %>">Delete</a>
+                  <a hidden id="edit_<%= news._id %>" name="edit"class="btn btn-primary" onclick="let a = '<%= news._id %>';let x = '<%= news.inputTitle %>'; let y = '<%= news.inputDesc %>'; let z = '<%= news.inputTime %>'; dltPost(a,x,y,z);" href="http://localhost:3000/newsEdit">Finish Edit</a>
+                  <button type="button" id="editStart_<%= news._id %>" class="btn btn-primary" onclick="let id1='<%= news._id %>'; dlt(id1)">Edit</button>
+                  <button type="button" hidden id="editCancel_<%= news._id %>"class="btn btn-danger" onclick="let id1='<%= news._id %>'; dlt(id1)">Cancel</button>
+                  <a id="delete_<%= news._id %>" name="delete"class="btn btn-danger" href="http://localhost:3000/newsEdit/delete/<%= news._id %>">Delete</a>
                 </td>
                 </tr>
           <% }); %>
       </tbody>
   </table>
-  <%- include('./footer') %>
+    <%- include('./footer') %>
   <script
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -45,11 +45,12 @@
   <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
   </body>
   <script>
-    function dlt(){
-        document.getElementById("edit").toggleAttribute("hidden");
-        document.getElementById("editCancel").toggleAttribute("hidden");
-        document.getElementById("editStart").toggleAttribute("hidden");
-        document.getElementById("delete").toggleAttribute("hidden");
+    function dlt(id){
+      
+        document.getElementById("edit_"+id).toggleAttribute("hidden");
+        document.getElementById("editCancel_"+id).toggleAttribute("hidden");
+        document.getElementById("editStart_"+id).toggleAttribute("hidden");
+        document.getElementById("delete_"+id).toggleAttribute("hidden");
         var elements = document.getElementById("table").getElementsByTagName("td");
           for(var i = 0, length = elements.length; i < length; i++) {
             console.log(elements[i]);
@@ -66,6 +67,7 @@
         var inputDesc=document.getElementById(desc).innerHTML;
         var inputTime=document.getElementById(time).innerHTML;
         console.log(inputTitle,inputDesc,inputTime);
+        
         $.get("http://localhost:3000/newsEdit/edit/"+id+"/"+inputDesc+"/"+inputTime+"/"+inputTitle);
         //event.preventDefault();
       }

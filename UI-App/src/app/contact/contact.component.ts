@@ -11,5 +11,10 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  sendHandler(event: any){
+    console.log(event);
+    event.target.innerText = 'Send';
+    alert('Email Send');
 
+}
 }
