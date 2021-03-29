@@ -5,8 +5,8 @@ const redis = require('redis'); // npm i redis
 const axios = require('axios').default;
 
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+app.get('/chat', (req, res) => {
+  res.sendFile(__dirname + '/public/chat.html');
 });
 
 
