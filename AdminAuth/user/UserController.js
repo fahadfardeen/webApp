@@ -89,6 +89,38 @@ router.get('/getnews', function (req, res) {
     });
 });
 
+//update news
+router.get('/edit/:id/:desc/:time/:title', function (req, res) {
+    var token = localStorage.getItem('authtoken')
+    console.log("token>>>",token)
+    if (!token) {
+        res.redirect('/')
+    }
+    jwt.verify(token, config.secret, function(err, decoded) {
+    if (err) {
+        res.redirect('/')
+    }; 
+    console.log(req.params.id);
+    console.log(req.params.desc)
+    console.log(req.params.time)
+    console.log(req.params.title)
+    MongoClient.connect('mongodb://127.0.0.1:27017/', {useNewUrlParser:true}, function(err,client) {
+        if(err) throw err;
+        db = client.db('admin');
+        var slist;
+        db.collection('newsmodels').update({_id: new Mongodb.ObjectID(req.params.id.trim())}, {inputTitle: req.params.title, inputDesc: req.params.desc, inputTime: req.params.time});
+        /*db.collection('newsmodels').find().toArray((err,data) => {
+            if(err) throw err;
+            console.log(data);
+            res.render('newsEdit.ejs',{data})
+        })   */     
+    })
+    
+})
+});
+
+
+//delete news
 router.get('/delete/:id', function (req, res) {
     var token = localStorage.getItem('authtoken')
     console.log("token>>>",token)
@@ -98,8 +130,20 @@ router.get('/delete/:id', function (req, res) {
     jwt.verify(token, config.secret, function(err, decoded) {
     if (err) {
         res.redirect('/')
-    };    
+    }; 
+    console.log(req.params.id);
+    MongoClient.connect('mongodb://127.0.0.1:27017/', {useNewUrlParser:true}, function(err,client) {
+        if(err) throw err;
+        db = client.db('admin');
+        var slist;
+        db.collection('newsmodels').deleteOne({_id: new Mongodb.ObjectID(req.params.id.trim())});
+        db.collection('newsmodels').find().toArray((err,data) => {
+            if(err) throw err;
+            console.log(data);
+            res.render('newsEdit.ejs',{data})
+        })       
     })
+})
 });
 
 
