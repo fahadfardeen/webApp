@@ -969,6 +969,9 @@ contact-me {
   margin: auto auto;
   padding: 0;
 }
-
+#map {
+  width: 100%;
+  height: 480px;
+}
 
  

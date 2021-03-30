@@ -20,7 +20,7 @@
                         <div class="backside">
                             <div class="card">
                                 <div class="card-body text-center mt-4">
-                                    <h4 class="card-title">{{news.inputTitle}}</h4>
+                                    <a href="{{news.inputUrl}}"><h4 class="card-title">{{news.inputTitle}}</h4></a>
                                     <p class="card-text">{{news.inputDesc}}</p>
                                     <ul class="list-inline">
                                         <li class="list-inline-item">
@@ -44,6 +44,7 @@
                                             </a>
                                         </li>
                                     </ul>
+                                    <a href="{{news.inputUrl}}" class="btn btn-primary"> Read more..</a>
                                 </div>
                             </div>
                         </div>

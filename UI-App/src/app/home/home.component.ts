@@ -1,6 +1,5 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { HeaderComponent } from '../header/header.component';
-import { HeaderService } from '../service/header.service';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +11,9 @@ import { HeaderService } from '../service/header.service';
 })
 export class HomeComponent implements OnInit {
   isLoginNow: true;
-  constructor(private headerService: HeaderService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    console.log('home');
-    this.headerService.isUserLoggedIn.next(true);
+  
   }
 }

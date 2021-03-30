@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../service/news.service';
+ 
 
 @Component({
   selector: 'app-image-slider',
@@ -13,6 +14,7 @@ export class ImageSliderComponent implements OnInit {
 
   ngOnInit(): void {
     this.newsService.getNewsList().subscribe((res: any) => {
+      console.log('INSIDE SLIDER');
       // 3. get the res from the service
       this.newsList = res.slice(Math.max(res.length - 3, 0));
       console.log(this.newsList);
