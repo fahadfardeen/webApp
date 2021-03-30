@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NewsService } from '../Service/news.service';
+import { NewsService } from '../service/news.service';
 
 @Component({
   selector: 'app-image-slider',
