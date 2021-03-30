@@ -1,56 +1,110 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="/stylesheets/footer.css">
-    <link rel="stylesheet" href="/stylesheets/index.css">
-    <%- include('./header') %>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h3 class="text-center p-2">Add News</h3>
-    <div class="container">
-      <form method="POST" action="http://localhost:3000/add">
-        <div class="form-group">
-          <label for="inputTitle">Title</label>
-          <input type="text" class="form-control" name="inputTitle" id="inputTitle" placeholder="Enter Title">
-        </div>
-        <div class="form-group">
-          <label for="inputDesc">Description</label>
-          <input type="text" class="form-control" name="inputDesc" id="inputDesc" placeholder="Enter Description">
-        </div>
-        <div class="form-group">
-          <label for="inputUrl">URL</label>
-          <input type="url" class="form-control" name="inputUrl" id="inputUrl" placeholder="Enter URL">
-        </div>
-        <div class="form-group">
-          <label for="inputImg">URL to Image</label>
-          <input type="url" class="form-control" name="inputImg" id="inputImg" placeholder="Enter Image URL">
-        </div>
-        <div class="form-group">
-          <label for="inputTime">Published At</label>
-          <input type="date" class="form-control" name="inputTime" id="inputTime" placeholder="Enter Date">
-        </div>
-        <div class="container">
-          <div class="text-center">
-            <button type="submit" class="btn btn-info">Submit</button>
-            <button type="reset" class="btn btn-warning">Reset</button>
-          </div>
-        </div>
+<html lang="en">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Update 24x7 Admin</a>
+		  <ul class="navbar-nav mr-auto inline">
+			<li class="nav-item">
+			  <p>Please login to access the news</p>
+			</li>
+		  </ul>
+	  </nav>
+<div class="container">
+		<div class="row">
+			<div class="col" id="log">
+				<div class="limiter">
+					<div class="container-login100">
+						<div class="wrap-login100">
+							<form class="login100-form validate-form" action="/api/auth/login" method="POST">
+								<span class="login100-form-title p-b-26">
+									Login
+								</span>
+								<span class="login100-form-title p-b-53">
+									<i class="zmdi zmdi-font"></i>
+								</span>
 
-      </form>
-    </div>
-  <%- include('./footer') %>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-  </body>
-  <script>
-    $(document).ready( function () {
-      $('#myTable').DataTable();
-    } );
-  </script>
+
+								<div class="form-group validate-input" data-validate="Enter username">
+									<input class="form-control" type="text" name="username">
+									<span class="focus-input100" data-placeholder="username"></span>
+								</div>
+
+								<div class="form-group validate-input" data-validate="Enter password">
+									<span class="btn-show-pass">
+										<i class="zmdi zmdi-eye"></i>
+									</span>
+									<input class="form-control" type="password" name="password">
+									<span class="focus-input100" data-placeholder="Password"></span>
+								</div>
+
+								<div class="form-group">
+									<div class="wrap-login100-form-btn">
+										<div class="login100-form-bgbtn"></div>
+										<button class="btn btn-primary" type="submit">
+											Login
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- sign up-->
+			<div class="col">
+				<div class="limiter">
+					<div class="container-login100">
+						<div class="wrap-login100">
+							<form class="login100-form validate-form" action="/api/auth/register" method="POST">
+								<span class="login100-form-title p-b-26">
+									Sign Up
+								</span>
+								
+								<span class="login100-form-title p-b-53">
+									<i class="zmdi zmdi-font"></i>
+								</span>
+								<div class="form-group">
+									<input class="form-control" type="text" name="username">
+									<span class="focus-input100" data-placeholder="User Name"></span>
+								</div>
+
+								<div class="form-group">
+									<input class="form-control" type="text" name="email">
+									<span class="focus-input100" data-placeholder="Email"></span>
+								</div>
+
+								<div class="form-group validate-input" data-validate="Enter password">
+									<span class="btn-show-pass">
+										<i class="zmdi zmdi-eye"></i>
+									</span>
+									<input class="form-control" type="password" name="password">
+									<span class="focus-input100" data-placeholder="Password"></span>
+								</div>
+
+								<div class="form-group">
+									<div class="wrap-login100-form-btn">
+										<div class="login100-form-bgbtn"></div>
+										<button class="btn btn-primary" type="submit">
+											Sign Up
+										</button>
+										<button class="btn btn-warning" type="reset">
+											Reset
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</div>
+</body>
 </html>
