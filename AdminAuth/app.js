@@ -1,8 +1,8 @@
 var express = require('express');
 var app = express();
-var db = require('./db');
+var db = require('./config/mongoConnect');
 var path = require('path');
-var UserController = require('./user/UserController');
+var UserController = require('./routes/UserController');
 
 app.use(express.static(path.join(__dirname, 'public')));
 

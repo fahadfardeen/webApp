@@ -10,9 +10,9 @@ const jwt = require('jsonwebtoken');
 // For encrypting Password
 const bcrypt = require('bcryptjs');
 // For Secert Token
-const config = require('../config');
+const config = require('../config/config');
 // For User Schema
-const User = require('../user/User');
+const User = require('../models/user');
 
 const session = require('express-session');
 //not sure yet
