@@ -64,7 +64,7 @@ router.get('/getnews', function (req, res) {
 });
 //post news
 router.post('/add', function(req, res, next) {
-    console.log(req.params, req.body, req.query);
+
     const news = new newsModel(req.body);
     news.save( (err, status) => {   
       if(!err){
