@@ -3,8 +3,8 @@
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="/stylesheets/footer.css">
-    <link rel="stylesheet" href="/stylesheets/newsEdit.css">
+    <link rel="stylesheet" href="/footer.css">
+    <link rel="stylesheet" href="/newsEdit.css">
     <%- include('./header') %>
     <title>NewsEdit</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -26,10 +26,10 @@
                 <td id='<%= news.inputDesc %>' class="row-data" contenteditable="false"><%= news.inputDesc %></td>
                 <td id='<%= news.inputTime %>' class="row-data" contenteditable="false"><%= news.inputTime %></td>
                 <td id='<%= news._id %>' class="row-data">
-                  <a hidden id="edit" name="edit"class="btn btn-primary" onclick="let a = '<%= news._id %>';let x = '<%= news.inputTitle %>'; let y = '<%= news.inputDesc %>'; let z = '<%= news.inputTime %>'; dltPost(a,x,y,z);">Finish Edit</a>
-                  <button type="button" id="editStart" class="btn btn-primary" onclick="dlt(null)">Edit</button>
-                  <button type="button" hidden id="editCancel"class="btn btn-danger" onclick="dlt(null)">Cancel</button>
-                  <a id="delete" name="delete"class="btn btn-danger" href="http://localhost:3000/users/delete/<%= news._id %>">Delete</a>
+                  <a hidden id="edit_<%= news._id %>"  name="edit"class="btn btn-primary" onclick="let a = '<%= news._id %>';let x = '<%= news.inputTitle %>'; let y = '<%= news.inputDesc %>'; let z = '<%= news.inputTime %>'; dltPost(a,x,y,z);" >Finish Edit</a>
+                  <button type="button" id="editStart_<%= news._id %>"  class="btn btn-primary" onclick="let id1='<%= news._id %>'; dlt(id1)">Edit</button>
+                  <button type="button" hidden id="editCancel_<%= news._id %>"class="btn btn-danger" onclick="let id1='<%= news._id %>'; dlt(id1)">Cancel</button>
+                  <a id="delete_<%= news._id %>" name="delete"class="btn btn-danger" href="http://localhost:3000/users/delete/<%= news._id %>">Delete</a>
                 </td>
                 </tr>
           <% }); %>
@@ -45,23 +45,28 @@
   <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
   </body>
   <script>
-    function dlt(){
-        document.getElementById("edit").toggleAttribute("hidden");
-        document.getElementById("editCancel").toggleAttribute("hidden");
-        document.getElementById("editStart").toggleAttribute("hidden");
-        document.getElementById("delete").toggleAttribute("hidden");
-        var elements = document.getElementById("table").getElementsByTagName("td");
-          for(var i = 0, length = elements.length; i < length; i++) {
-            console.log(elements[i]);
-            if( elements[i].contentEditable == 'false'){
-              elements[i].contentEditable = 'true';
-            } else{
-              elements[i].contentEditable = 'false';
-            }
+    function dlt(id){
+      
+      document.getElementById("edit_"+id).toggleAttribute("hidden");
+      document.getElementById("editCancel_"+id).toggleAttribute("hidden");
+      document.getElementById("editStart_"+id).toggleAttribute("hidden");
+      document.getElementById("delete_"+id).toggleAttribute("hidden");
+      var elements = document.getElementById("table").getElementsByTagName("td");
+        for(var i = 0, length = elements.length; i < length; i++) {
+          console.log(elements[i]);
+          if( elements[i].contentEditable == 'false'){
+            elements[i].contentEditable = 'true';
+          } else{
+            elements[i].contentEditable = 'false';
           }
-      }
+        }
+    }
       function dltPost(id, title, desc, time){
         console.log(title, desc, time);
+        document.getElementById("edit_"+id).toggleAttribute("hidden");
+        document.getElementById("editCancel_"+id).toggleAttribute("hidden");
+        document.getElementById("editStart_"+id).toggleAttribute("hidden");
+        document.getElementById("delete_"+id).toggleAttribute("hidden");
         var inputTitle=document.getElementById(title).innerHTML;
         var inputDesc=document.getElementById(desc).innerHTML;
         var inputTime=document.getElementById(time).innerHTML;

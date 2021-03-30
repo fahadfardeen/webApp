@@ -4,6 +4,7 @@ var db = require('./db');
 
 var UserController = require('./user/UserController');
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', UserController);
 
