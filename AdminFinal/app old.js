@@ -8,21 +8,21 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var newsRouter = require('./routes/newsEdit');
 var app = express();
-//This is all for the chatbox
-const server = require('http').createServer();
-const options={
-  cors:true
- }
-const io = require('socket.io')(server, options);
+// //This is all for the chatbox
+// const server = require('http').createServer();
+// const options={
+//   cors:true
+//  }
+// const io = require('socket.io')(server, options);
 
-io.on("connection", (socket) => {
-  socket.on("newChat", (arg1, arg2, callback) => {
-    console.log(arg1); // 1
-    console.log(arg2); // { name: "updated" }
-    io.sockets.emit("newChat", arg1)
-  });
-});
-server.listen(3001);
+// io.on("connection", (socket) => {
+//   socket.on("newChat", (arg1, arg2, callback) => {
+//     console.log(arg1); // 1
+//     console.log(arg2); // { name: "updated" }
+//     io.sockets.emit("newChat", arg1)
+//   });
+// });
+// server.listen(3001);
 //end chatbox stuff
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

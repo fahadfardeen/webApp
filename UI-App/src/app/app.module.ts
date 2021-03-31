@@ -14,6 +14,8 @@ import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { LatestNewsComponent } from './sports/latest-news/latest-news.component';
 import { WeatherComponent } from './weather/weather.component';
 import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
+import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
+
 
 
 
@@ -30,14 +32,17 @@ import { PageNotFoundComponentComponent } from './page-not-found-component/page-
     ImageSliderComponent,
     LatestNewsComponent,
     WeatherComponent,
-    PageNotFoundComponentComponent
+    PageNotFoundComponentComponent,
+    ChatInboxComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule // Http Client related module
+    HttpClientModule,
+     // Http Client related module
   ],
   providers: [],
   bootstrap: [AppComponent]

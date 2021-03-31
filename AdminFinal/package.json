@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "serve": "nodemon server.js"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.4.2",
@@ -19,6 +20,7 @@
     "mongoose": "^5.12.2",
     "morgan": "~1.9.1",
     "node-localstorage": "^2.1.6",
+    "nodemon": "^2.0.7",
     "require": "^2.4.20",
     "socket.io": "^4.0.0"
   }
