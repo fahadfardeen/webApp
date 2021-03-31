@@ -8,7 +8,7 @@ router.use(cors());
  //Contact: should receive two form fields, email and query
 router.post('/', function (req, res, next) {
     console.log("IN CONTACT POST");
-    let sendgridAPIKey = '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';
+    let sendgridAPIKey = 'test';
     sgMail.setApiKey(sendgridAPIKey);
     tempObj = {
         to: req.body.email,
