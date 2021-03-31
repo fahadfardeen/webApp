@@ -25,7 +25,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/news', newsRouter);
 app.use('/api/auth', AuthController);
-app.use('/routes/contact', contactRouter);
+app.use('/contact', contactRouter);
 
 const port = 3001;
 const io = require("socket.io")(http, {

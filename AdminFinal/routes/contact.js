@@ -16,7 +16,7 @@ router.post('/', function (req, res, next) {
         from: 'husseinsiad01@gmail.com',
         subject: 'Thank you for contacting us',
         text: 
-        "Hello, \nThank you for contacting us. We will get back to your shortly.\n------------------------------\nPlease do not reply to this automated message.\n--Update 24x7 Team"
+        "Hello, " +req.body.name + "\nThank you for contacting us. We will get back to your shortly. Your query was:" +req.body.message + " \n------------------------------\nPlease do not reply to this automated message.\n--Update 24x7 Team"
     }
     sgMail.send(tempObj)
     res.status(200).json({msg: "email sent"});
