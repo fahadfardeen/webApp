@@ -57,7 +57,31 @@ router.get('/getnews', function (req, res) {
         db.collection('news').find().toArray((err,data) => {
             if(err) throw err;
             console.log(data);
-            res.render('newsEdit.ejs',{data})
+            
+            res.render('newsEdit.ejs',{data});
+            })
+        })
+    });
+});
+router.get('/allNews', function (req, res) {
+    var token = localStorage.getItem('authtoken')
+    console.log("token>>>",token)
+    if (!token) {
+        res.redirect('/')
+    }
+    jwt.verify(token, config.secret, function(err, decoded) {
+    if (err) {
+        res.redirect('/')
+    };    
+    //fetch news from db, below need to be modified
+    MongoClient.connect('mongodb://127.0.0.1:27017/', {useNewUrlParser:true}, function(err,client) {
+        if(err) throw err;
+        db = client.db('webApp');
+        var slist;
+        db.collection('news').find().toArray((err,data) => {
+            if(err) throw err;
+            console.log(data);
+            res.json(data);
             })
         })
     });

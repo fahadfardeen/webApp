@@ -3,8 +3,8 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var http = require('http').createServer(app);
-
-
+var cors = require('cors');
+app.use(cors());
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var newsRouter = require('./routes/news');
