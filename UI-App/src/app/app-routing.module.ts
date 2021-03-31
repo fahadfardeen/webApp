@@ -10,6 +10,7 @@ import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
 
 // config the routes
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'about', component: AboutComponent },
