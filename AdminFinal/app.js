@@ -1,6 +1,8 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+var app = express();
+var http = require('http').createServer(app);
 
 
 var indexRouter = require('./routes/index');
@@ -8,11 +10,6 @@ var usersRouter = require('./routes/users');
 var newsRouter = require('./routes/news');
 var AuthController = require('./auth/AuthController');
 var contactRouter = require('./routes/contact');
-
-var express = require('express');
-var app = express();
-var path = require('path');
-
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -30,13 +27,32 @@ app.use('/news', newsRouter);
 app.use('/api/auth', AuthController);
 app.use('/routes/contact', contactRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
+const port = 3001;
+const io = require("socket.io")(http, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+
+  }
+});
+
+http.listen(port, "127.0.0.1", () => {
+  console.log(`Example app listening at http://localhost:${port}`)
+})
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+  socket.on('message', (msg) => {
+    console.log(msg);
+    io.emit('message-broadcast', msg);
+  });
+});
+app.use(function (req, res, next) {
   next(createError(404));
 });
-  
+
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

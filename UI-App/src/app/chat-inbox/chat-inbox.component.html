@@ -1,0 +1,19 @@
+<div class="chat-messages">
+        
+
+  
+<div class = "container">
+  <div class="chat-messages-show-container">
+    <ul class="chat-messages-show-list">
+      <li class="msglist-item" *ngFor="let msg of messageList">{{msg}}</li>
+    </ul>
+  </div>
+  <div class="chat-messages-create-container">
+    
+      <input class="chat-name-create-input" type="text" placeholder= "Type name..." [(ngModel)]="name">
+
+    <!-- <label for="msg"><b>Message</b></label> -->
+    <input class="chat-messages-create-input" type="text" placeholder="Type message.." [(ngModel)]="message">
+    <button class="btn btn-secondary" id = "chat-messages-create-button" (click)="SendMessage()"> Send </button>
+  </div>
+  </div>
