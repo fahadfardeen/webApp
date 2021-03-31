@@ -3,8 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { NewsComponent } from './sports/news/news.component';
@@ -15,10 +14,8 @@ import { LatestNewsComponent } from './sports/latest-news/latest-news.component'
 import { WeatherComponent } from './weather/weather.component';
 import { PageNotFoundComponentComponent } from './page-not-found-component/page-not-found-component.component';
 import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
-
-
-
-
+import { HeaderComponent } from './shared/components/header/header.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +31,6 @@ import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
     WeatherComponent,
     PageNotFoundComponentComponent,
     ChatInboxComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -42,9 +38,9 @@ import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-     // Http Client related module
+    // Http Client related module
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
