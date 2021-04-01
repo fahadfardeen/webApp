@@ -9,7 +9,7 @@ router.use(cors());
 router.post('/', function (req, res, next) {
     console.log('email' + req.body);
     console.log("IN CONTACT POST");
-    let sendgridAPIKey = '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';
+    let sendgridAPIKey = 'test';
     sgMail.setApiKey(sendgridAPIKey);
     tempObj = {
         to: req.body.email,
