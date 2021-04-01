@@ -1,32 +1,23 @@
-  <!-- Site footer -->
-  <div class="float-right"> <button class="bg bg-primary"> Need Help!</button>
-  </div>
-
- 
-  <br>
-  <footer class="site-footer bg bg-dark mt-1">
-    <div class="container">
-      <div class="row">
-        <!-- <div class="col-sm-12 col-md-6">
-          <h6>About</h6>
-          <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
-        </div> -->
-
-        <!-- <div class="col-xs-6 col-md-3">
-          <h6>Categories</h6>
-          <ul class="footer-links">
-            <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-            <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-            <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-            <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-            <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-            <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-          </ul>
-        </div> -->
-
-        
+<div id="chatter" [@openClose]="isOpen ? 'open' : 'closed'" class="container">
+  <div *ngIf="isOpen" class="container-fluid" id="chat-messages">
+      <div class="container-fluid" id="chat-messages-show-container">
+        <ul class="chat-messages-show-list">
+          <li class="msglist-item" *ngFor="let msg of messageList">{{msg}}</li>
+        </ul>
       </div>
-      <hr>
+      <div id="chat-messages-create-container"class="container-fluid">
+  
+        <input id="chat-name-create-input" class="form-control"type="text" placeholder="Name:" autofocus [(ngModel)]="name">
+  
+        <!-- <label for="msg"><b>Message</b></label> -->
+        <input id="chat-messages-create-input" class="form-control" type="text" placeholder="Chat:" [(ngModel)]="message">
+        <button class="btn btn-secondary" id="chat-messages-create-button" (click)="SendMessage()"> Send </button>
+      </div>
+</div>
+</div>
+<footer class="site-footer bg bg-dark">
+    <!-- Site footer -->
+    <div class="float-right mr-3"> <button id="btn"class="btn bg-primary mr-3" (click)="toggle()"> Need Help!</button>
     </div>
     <div class="container">
       <div class="row">

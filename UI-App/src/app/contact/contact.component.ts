@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ContactService } from '../Service/contact.service';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ConDialogComponent } from '../shared/components/con-dialog/con-dialog.component';
+//npm install --save @angular/material
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
@@ -10,7 +12,7 @@ import { ContactService } from '../Service/contact.service';
 export class ContactComponent implements OnInit {
   contactForm: any;
 
-  constructor(private fb: FormBuilder, private contactService: ContactService) {
+  constructor(private fb: FormBuilder, private contactService: ContactService, private dialog: MatDialog) {
     this.contactForm = this.fb.group(
       {
         name: ['', Validators.required],
@@ -28,18 +30,17 @@ export class ContactComponent implements OnInit {
 
   contactHandler(): void {
 
-    // const data = this.contactForm;
-    // // tslint:disable-next-line:prefer-for-of
-    // for (let index = 0; index < data.length; index++) {
-    //   const element = data[index];
-
-    //   console.log(element);
-    // }
     console.log('formData' + this.contactForm.value);
     this.contactService
       .contactMe(this.contactForm.value)
       .subscribe((res: any ) => {
         console.log(res);
       });
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width="30%";
+      this.dialog.open(ConDialogComponent, dialogConfig);
+
   }
 }

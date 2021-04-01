@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import LocationPicker from 'location-picker';
-
+//make it display avatars on the right in two columsn and map on left like map; | |
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',

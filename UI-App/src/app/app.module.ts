@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { NewsComponent } from './sports/news/news.component';
@@ -16,6 +16,8 @@ import { PageNotFoundComponentComponent } from './page-not-found-component/page-
 import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
+import { ConDialogComponent } from './shared/components/con-dialog/con-dialog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -31,11 +33,14 @@ import { FooterComponent } from './shared/components/footer/footer.component';
     WeatherComponent,
     PageNotFoundComponentComponent,
     ChatInboxComponent,
+    ConDialogComponent,
   ],
   imports: [
+    MatDialogModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     // Http Client related module

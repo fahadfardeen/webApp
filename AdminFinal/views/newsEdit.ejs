@@ -56,6 +56,11 @@
       var elements = document.getElementById("table").getElementsByTagName("td");
         for(var i = 0, length = elements.length; i < length; i++) {
           console.log(elements[i]);
+          if(elements[i].lastElementChild !== null){
+            console.log('NODENAME',elements[i].children[0].nodeName);
+            continue;
+          }
+          
           if( elements[i].contentEditable == 'false'){
             elements[i].contentEditable = 'true';
           } else{
