@@ -1,7 +1,7 @@
 <link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
 
 <div class="container">
-<section>
+  <section>
     <div class="contact-me">
       <div class="row">
         <div class="col-sm-12">
@@ -13,19 +13,39 @@
               <form [formGroup]="contactForm" (ngSubmit)="contactHandler()" data-form-title="CONTACT US">
                 <input type="hidden" data-form-email="true">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="name" required="" placeholder="Name*" data-form-field="Name" formControlName="name">
+                  <input type="text" class="form-control" name="name" required="" placeholder="Name*"
+                    data-form-field="Name" formControlName="name"  [ngClass]="{ 'is-invalid': contactForm.get('name')?.touched && contactForm.get('name')?.invalid }"/>
+                    <div class="invalid-feedback">
+                      <div *ngIf="contactForm.get('name')?.errors?.required">Name is required</div>
+                      
+                    </div>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" name="email" required="" placeholder="Email*" data-form-field="Email" formControlName="email">
+                  <input type="email" class="form-control" name="email" required="" placeholder="Email*"
+                    data-form-field="Email" formControlName="email"  [ngClass]="{ 'is-invalid': contactForm.get('email')?.touched && contactForm.get('email')?.invalid }"/>
+                    <div class="invalid-feedback">
+                      <div *ngIf="contactForm.get('email')?.errors?.required">Email is required</div>
+                      
+                    </div>
                 </div>
                 <div class="form-group">
-                  <input type="tel" class="form-control" name="phone" placeholder="Phone" data-form-field="Phone" formControlName="phone">
+                  <input type="tel" class="form-control" name="phone" placeholder="Phone" data-form-field="Phone"
+                    formControlName="phone" [ngClass]="{ 'is-invalid': contactForm.get('phone')?.touched && contactForm.get('phone')?.invalid }"/>
+                    <div class="invalid-feedback">
+                      <div *ngIf="contactForm.get('phone')?.errors?.required">Phone is required</div>
+                      
+                    </div>
                 </div>
                 <div class="form-group">
-                  <textarea class="form-control" name="message" placeholder="Message" rows="7" data-form-field="Message" formControlName="message"></textarea>
+                  <textarea class="form-control" name="message" placeholder="Message" rows="7" data-form-field="Message"
+                    formControlName="message"  [ngClass]="{ 'is-invalid': contactForm.get('message')?.touched && contactForm.get('message')?.invalid }"> </textarea>
+                    <div class="invalid-feedback">
+                      <div *ngIf="contactForm.get('message')?.errors?.required">Your Query  is required</div>
+                      
+                    </div>
                 </div>
                 <div>
-                  <button type="submit" class="btn btn-lg btn-danger">CONTACT US</button>
+                  <button type="submit" class="btn btn-lg btn-secondary">CONTACT US</button>
                 </div>
               </form>
             </div>

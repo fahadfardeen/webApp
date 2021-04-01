@@ -12,7 +12,11 @@ import { ConDialogComponent } from '../shared/components/con-dialog/con-dialog.c
 export class ContactComponent implements OnInit {
   contactForm: any;
 
-  constructor(private fb: FormBuilder, private contactService: ContactService, private dialog: MatDialog) {
+  constructor(
+    private fb: FormBuilder,
+    private contactService: ContactService,
+    private dialog: MatDialog
+  ) {
     this.contactForm = this.fb.group(
       {
         name: ['', Validators.required],
@@ -24,23 +28,19 @@ export class ContactComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-  
-  }
+  ngOnInit(): void {}
 
   contactHandler(): void {
-
     console.log('formData' + this.contactForm.value);
     this.contactService
       .contactMe(this.contactForm.value)
-      .subscribe((res: any ) => {
+      .subscribe((res: any) => {
         console.log(res);
       });
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      dialogConfig.width="30%";
-      this.dialog.open(ConDialogComponent, dialogConfig);
-
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '30%';
+    this.dialog.open(ConDialogComponent, dialogConfig);
   }
 }

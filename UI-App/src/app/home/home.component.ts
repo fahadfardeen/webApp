@@ -12,7 +12,5 @@ export class HomeComponent implements OnInit {
   isLoginNow: true;
   constructor() {}
 
-  ngOnInit(): void {
-  
-  }
+  ngOnInit(): void {}
 }

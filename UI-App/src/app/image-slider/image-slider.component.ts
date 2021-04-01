@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../Service/news.service';
- 
 
 @Component({
   selector: 'app-image-slider',
@@ -10,7 +9,6 @@ import { NewsService } from '../Service/news.service';
 export class ImageSliderComponent implements OnInit {
   constructor(private newsService: NewsService) {}
   newsList: [] = [];
- 
 
   ngOnInit(): void {
     this.newsService.getNewsList().subscribe((res: any) => {
